@@ -7,12 +7,12 @@ import argparse
 
 def __main__():
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Estimate chromosome and gene copy number from read counts', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--genome', required=True, help='Reference genome annotation in GFF3 format.' )
     parser.add_argument('--input', required=True, help='Read counts per gene or transcript in htseq-count format' )
     parser.add_argument('--orthologFile', help='File containing gene to ortholog mappings' )
     parser.add_argument('--outputPrefix', required=True, help='Prefix for all output files' )
-    parser.add_argument('--ploidy', default=2)
+    parser.add_argument('--ploidy', default=2, help='Canonical ploidy for this organism')
     args = parser.parse_args()
 
     # hack to use TPM module as this is for RNAseq and expects a stranded arg
