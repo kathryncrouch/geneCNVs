@@ -20,16 +20,20 @@ usage: calculateCNVs.py [-h] --genome GENOME --input INPUT
                         [--orthologFile ORTHOLOGFILE] --outputPrefix
                         OUTPUTPREFIX [--ploidy PLOIDY]
 
+Estimate chromosome and gene copy number from read counts
+
 optional arguments:
   -h, --help            show this help message and exit
-  --genome GENOME       Reference genome annotation in GFF3 format.
+  --genome GENOME       Reference genome annotation in GFF3 format. (default:
+                        None)
   --input INPUT         Read counts per gene or transcript in htseq-count
-                        format
+                        format (default: None)
   --orthologFile ORTHOLOGFILE
-                        File containing gene to ortholog mappings
+                        File containing gene to ortholog mappings (default:
+                        None)
   --outputPrefix OUTPUTPREFIX
-                        Prefix for all output files
-  --ploidy PLOIDY
+                        Prefix for all output files (default: None)
+  --ploidy PLOIDY       Canonical ploidy for this organism (default: 2)
   ```
   
   Example command line using example data:
