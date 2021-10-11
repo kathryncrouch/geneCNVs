@@ -67,6 +67,9 @@ class CNV(object):
 
     def _parseOrthologs(self):
         annotations = {}
+        if self.orthologFile is None:
+            print ("Ortholog mapping file not supplied. Gene copy numbers have already been calculated, but pooling over gene families wil not be carried out\n")
+            return annotations
         try:
             with open (self.orthologFile) as f:
                 next(f)
@@ -76,7 +79,7 @@ class CNV(object):
                         annotations[data[0]] = data[2]
                 f.close()
         except FileNotFoundError:
-            raise SystemExit("File {} containing gene to ortholog mappings could not be found. Gene copy numbers have already been calculated, but pooling over gene families will not be carried out\n".format(self.orthologFile))    
+            print ("File {} containing gene to ortholog mappings could not be found. Gene copy numbers have already been calculated, but pooling over gene families will not be carried out\n".format(self.orthologFile))
         return annotations
 
 
