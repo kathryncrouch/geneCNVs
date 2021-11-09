@@ -98,8 +98,8 @@ class CNV(object):
             try:
                 haploidNo = data[2]/self.chrPloidy[chr]
             except ZeroDivisionError:
-                print("Cannot calculate haploid numbers for genes on chromosome {} because ploidy is estimated to be 0\nSetting haploid number for gene {} to NA".format(chr, gene))
-                haploidNo = 'NA'
+                print("Cannot calculate haploid numbers for genes on chromosome {} because ploidy is estimated to be 0\nSetting haploid number for gene {} to NaN".format(chr, gene))
+                haploidNo = float('NaN')
             clusterData[orthoMclId]['haploidNos'].append(haploidNo)
 
         for cluster, data in clusterData.items():
@@ -107,8 +107,8 @@ class CNV(object):
             try:
                 haploidNo = sum(data['haploidNos'])
             except TypeError:
-                print ("Haploid numbers could not be calculated for some genes in cluster {}. Haploid number for this cluster has been set to NA".format(cluster))
-                haploidNo = 'NA'
+                print ("Haploid numbers could not be calculated for some genes in cluster {}. Haploid number for this cluster has been set to NaN".format(cluster))
+                haploidNo = float('NaN')
             geneDose = sum(data['copyNumbers'])
             
             for gene in data['genes']:
@@ -137,7 +137,7 @@ class CNV(object):
                     try:
                         haploidNo = data[2]/ploidy
                     except ZeroDivisionError:
-                        haploidNo = 'NA'
+                        haploidNo = float('NaN')
                     out.write("{0}\t{1}\t{2:4.3f}\t{3:4.3f}\t{4:4.3f}\t{5:4.3f}\t{6}\t{7}\t{8:4.3f}\t{9:4.3f}\t{10}\n".format(gene, data[1], ploidy, float(data[0]), data[2], haploidNo, data[3], data[4], data[6], data[5], data[7]))
                 out.close()
         except FileNotFoundError:
