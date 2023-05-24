@@ -30,7 +30,7 @@ class GffParser(object):
 
                 fields = line.split('\t')
 
-                if fields[self.featureTypeCol] == 'transcript' or fields[self.featureTypeCol].endswith('RNA'):
+                if 'transcript' in fields[self.featureTypeCol] or fields[self.featureTypeCol].endswith('RNA'):
                     id = None;
                     parent = None;
                     attributeString = fields[self.attributeCol]
@@ -174,14 +174,21 @@ class TPM(object):
 
     def writeTPM(self, args):
         if self.senseTPM:
-            self._writeTPMFile(self.senseTPM, args.outputPrefix + ".tpm")
+            try:
+                self._writeTPMFile(self.senseTPM, args.outputPrefix + ".tpm")
+            except AttributeError:
+                self._writeTPMFile(self.senseTPM, args.output)
         else:
             raise SystemExit('TPM values have not been calculated yet. Please use TPM.doTPMCalculation() to calulate TPM values before writing to file.\n')
 
         if self.stranded and self.antisenseTPM:
-            self._writeTPMFile(self.antisenseTPM, args.antisense_outputPrefix + ".tpm")
+            try:
+                self._writeTPMFile(self.antisenseTPM, args.antisense_outputPrefix + ".tpm")
+            except AttributeError:
+                self._writeTPMFile(self.antisenseTPM, args.antisense_output)
         elif args.stranded and not self.antisesnseTPM:
             raise SystemExit('TPM values have not been calculated yet. Please use TPM.doTPMCalculation() to calulate TPM values before writing to file.\n')
+
 
 
     
