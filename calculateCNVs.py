@@ -6,6 +6,10 @@ from TPMtool.TPMtool import TPM
 from CNVs.CNVs import CNV
 import argparse
 
+
+####testing for class####
+
+
 def __main__():
 
     parser = argparse.ArgumentParser(description='Estimate chromosome and gene copy number from read counts', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
